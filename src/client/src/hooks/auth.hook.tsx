@@ -24,12 +24,16 @@ export const useAuth = () => {
   }, [])
 
   React.useEffect(() => {
-    const data = JSON.parse(localStorage.getItem(STORAGE_NAME))
+    const storageName = localStorage.getItem(STORAGE_NAME)
 
-    if (data && data.token) {
-      login({ token: data.token, userId: data.userId })
+    if (storageName) {
+      const data = JSON.parse(storageName)
+
+      if (data && data.token) {
+        login({ token: data.token, userId: data.userId })
+      }
+      setIsReady(true)
     }
-    setIsReady(true)
   }, [login])
 
   return { login, logout, token, userId, isReady }

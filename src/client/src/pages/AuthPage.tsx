@@ -2,7 +2,7 @@ import React from 'react'
 import { useHttp } from '../hooks/http.hook'
 import { AuthContext } from '../context/AuthContext'
 
-const AuthPage = () => {
+const AuthPage: React.FunctionComponent = () => {
   const { login } = React.useContext(AuthContext)
   const { loading, request, error, clearError } = useHttp()
   const [form, setForm] = React.useState({
@@ -26,7 +26,7 @@ const AuthPage = () => {
   const handleLoginClick = React.useCallback(async () => {
     try {
       const data = await request('/api/auth/login', 'POST', { ...form })
-      login({ userId: data.userId, token: data.token })
+      login && login({ userId: data.userId, token: data.token })
     } catch (error) {
 
     }

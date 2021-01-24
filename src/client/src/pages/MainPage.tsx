@@ -5,7 +5,7 @@ import { AuthContext } from '../context/AuthContext'
 import { Loader } from '../components'
 import { EMood, MOOD_DESCRIPTION, DEFAULT_MOOD } from '../constants'
 
-const MainPage = () => {
+const MainPage: React.FunctionComponent = () => {
   const history = useHistory()
   const { loading, request, error, clearError } = useHttp()
   const [form, setForm] = React.useState(DEFAULT_MOOD)
@@ -26,19 +26,21 @@ const MainPage = () => {
     }
   }, [request, form, token, history])
 
+  if (loading) {
+    return <Loader />
+  }
+
   return (
     <React.Fragment>
-      {loading ? <Loader /> : <React.Fragment>
-        <h1>Как дела?</h1>
-        <h2>{MOOD_DESCRIPTION[form.mood]}</h2>
-        <input type="range" id="mood" name="mood"
-          min={EMood.TERRIBLE} max={EMood.AMAZING} value={form.mood}
-          onChange={handleChange}
-          step="1" />
-        <textarea id="comment" name="comment" value={form.comment} placeholder="Мысли" onChange={handleChange} />
-        <button onClick={handleSubmitClick}>Сохранить</button>
-        <div>{error}</div>
-      </React.Fragment>}
+      <h1>Как дела? </h1>
+      < h2 > {MOOD_DESCRIPTION[form.mood]} </h2>
+      < input type="range" id="mood" name="mood"
+        min={EMood.TERRIBLE} max={EMood.AMAZING} value={form.mood}
+        onChange={handleChange}
+        step="1" />
+      <textarea id="comment" name="comment" value={form.comment} placeholder="Мысли" onChange={handleChange} />
+      <button onClick={handleSubmitClick}> Сохранить </button>
+      < div > {error} </div>
     </React.Fragment>
   )
 }

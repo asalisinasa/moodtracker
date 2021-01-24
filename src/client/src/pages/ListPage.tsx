@@ -2,11 +2,12 @@ import React from 'react'
 import { useHttp } from '../hooks/http.hook'
 import { AuthContext } from '../context/AuthContext'
 import { Loader } from '../components'
+import { INote } from './NotePage'
 
-const ListPage = () => {
+const ListPage: React.FunctionComponent = () => {
   const { token } = React.useContext(AuthContext)
   const { request, loading } = useHttp()
-  const [notes, setNotes] = React.useState(null)
+  const [notes, setNotes] = React.useState<INote[] | null>(null)
 
   const fetchData = React.useCallback(async () => {
     try {
@@ -29,7 +30,7 @@ const ListPage = () => {
   return (
     <div>
       <h1>ListPage</h1>
-      <ul>
+      {notes && <ul>
         {notes.map((item, key) =>
           <li key={key}>
             <h2>{item.mood}</h2>
@@ -37,7 +38,7 @@ const ListPage = () => {
             <p>{item.date}</p>
           </li>)
         }
-      </ul>
+      </ul>}
     </div>
   )
 }

@@ -5,11 +5,19 @@ import { AuthContext } from '../context/AuthContext'
 import { Loader } from '../components'
 import { MOOD_DESCRIPTION } from '../constants'
 
-const NotePage = () => {
+export interface INote {
+  date: Date
+  comment: string
+  mood: number
+}
+
+interface RouteParams { id: string }
+
+const NotePage: React.FunctionComponent = () => {
   const { token } = React.useContext(AuthContext)
   const { request, loading } = useHttp()
-  const { id } = useParams()
-  const [note, setNote] = React.useState(null)
+  const { id } = useParams<RouteParams>()
+  const [note, setNote] = React.useState<INote | null>(null)
 
   const fetchData = React.useCallback(async () => {
     try {
@@ -33,9 +41,9 @@ const NotePage = () => {
   return (
     <div>
       <h1>NotePage</h1>
-      <p>{note.comment || 'Нет комментария'}</p>
-      <p>{note.date}</p>
-      <p>{MOOD_DESCRIPTION[note.mood]}</p>
+      <p>{note?.comment || 'Нет комментария'}</p>
+      <p>{note?.date}</p>
+      <p>{MOOD_DESCRIPTION[note?.mood]}</p>
     </div>
   )
 }
