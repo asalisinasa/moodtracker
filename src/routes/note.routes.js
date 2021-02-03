@@ -1,5 +1,4 @@
 const { Router } = require('express')
-const config = require('config')
 const { check, validationResult } = require('express-validator')
 const auth = require('../middleware/auth.middleware')
 const Note = require('../models/Note')
@@ -14,7 +13,7 @@ router.post(
   async (req, res) => {
 
     try {
-      const baseUrl = config.get('baseUrl')
+      const baseUrl = process.env.BASE_ULI
       const { mood, comment, userId: owner } = req.body
       const note = new Note({ mood, comment, owner: req.user.userId })
 
