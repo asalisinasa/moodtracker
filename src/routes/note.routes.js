@@ -29,7 +29,6 @@ router.get(
   '/',
   auth,
   async (req, res) => {
-    debugger
     try {
       const notes = await Note.find({ owner: req.user.userId }) // TODO
       res.json(notes)

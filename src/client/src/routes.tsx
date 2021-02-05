@@ -5,8 +5,8 @@ import MainPage from './pages/MainPage'
 import ListPage from './pages/ListPage'
 import NotePage from './pages/NotePage'
 
-export const useRoutes = (isAutentificated: boolean) => {
-    if (isAutentificated) {
+export const useRoutes = (isAuthenticated: boolean) => {
+    if (isAuthenticated) {
         return (
             <Switch>
                 <Route path="/" exact>
