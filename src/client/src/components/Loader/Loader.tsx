@@ -1,7 +1,12 @@
 import React from 'react'
+import * as S from './styles'
 
 const Loader = () => {
-  return <React.Fragment>Loading</React.Fragment>
+  return (
+    <S.Loader>
+      <S.Spinner />
+    </S.Loader>
+  )
 }
 
 export default Loader
