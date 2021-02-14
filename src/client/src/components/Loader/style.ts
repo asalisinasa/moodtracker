@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes } from "styled-components"
 
 const spin = keyframes`
   from {
@@ -19,6 +19,6 @@ export const Loader = styled.div`
 export const Spinner = styled.div`
   width: 40px;
   height: 40px;
-  border: 5px solid black;
+  border: 5px solid ${({ theme }) => theme.color.light};
   animation: ${spin} 1s infinite linear;
 `

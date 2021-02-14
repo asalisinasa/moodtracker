@@ -1,12 +1,10 @@
-import React from 'react'
-import * as S from './styles'
+import React from "react"
+import * as S from "./style"
 
-const Loader = () => {
-  return (
-    <S.Loader>
-      <S.Spinner />
-    </S.Loader>
-  )
-}
+const Loader: React.FunctionComponent = () => (
+  <S.Loader>
+    <S.Spinner />
+  </S.Loader>
+)
 
 export default Loader

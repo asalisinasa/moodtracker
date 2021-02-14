@@ -1,4 +1,4 @@
-import { fontSize } from './fontSize'
+import { fontSize } from "./fontSize"
 
 export const typography = {
   body: `
@@ -9,7 +9,7 @@ export const typography = {
   `,
   action: `
       font-size: ${fontSize.s};
-      font-weight: normal;
+      font-weight: bold;
       line-height: 1.4;
       letter-spacing: -0.02em;
   `,
@@ -31,5 +31,5 @@ export const typography = {
     line-height: 1.3;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-  `
+  `,
 }

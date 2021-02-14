@@ -1,19 +1,19 @@
-import React from 'react'
+import React from "react"
 
-function noop() { }
+function noop() {}
 
 interface IAuthContext {
-    token: string | null
-    userId: string | null
-    login: (params: { userId: string, token: string }) => void
-    logout: () => void
-    isAuthenticated: boolean
+  token: NullableId
+  userId: NullableId
+  login: (parameters: { userId: NullableId; token: NullableId }) => void
+  logout: () => void
+  isAuthenticated: boolean
 }
 
 export const AuthContext = React.createContext<Partial<IAuthContext>>({
-    token: null,
-    userId: null,
-    login: noop,
-    logout: noop,
-    isAuthenticated: false
+  token: null,
+  userId: null,
+  login: noop,
+  logout: noop,
+  isAuthenticated: false,
 })

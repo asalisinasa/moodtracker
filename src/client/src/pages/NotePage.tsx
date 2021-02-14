@@ -1,9 +1,10 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
-import { useHttp } from '../hooks/http.hook'
-import { AuthContext } from '../context/AuthContext'
-import { Loader } from '../components'
-import { MOOD_DESCRIPTION } from '../constants'
+import React from "react"
+import { useParams } from "react-router-dom"
+import { useHistory } from "react-router"
+import { useHttp } from "../hooks/http.hook"
+import { AuthContext } from "../context/AuthContext"
+import { Loader } from "../components"
+import { MOOD_DESCRIPTION } from "../constants"
 
 export interface INote {
   date: Date
@@ -11,21 +12,25 @@ export interface INote {
   mood: number
 }
 
-interface RouteParams { id: string }
+interface RouteParameters {
+  id?: string
+}
 
 const NotePage: React.FunctionComponent = () => {
+  const history = useHistory()
   const { token } = React.useContext(AuthContext)
-  const { request, loading } = useHttp()
-  const { id } = useParams<RouteParams>()
-  const [note, setNote] = React.useState<INote | null>(null)
+  const { request, isLoading } = useHttp()
+  const { id } = useParams<RouteParameters>()
+  const [note, setNote] = React.useState<INote | undefined>()
 
   const fetchData = React.useCallback(async () => {
     try {
-      const data = await request(`/api/note/${id}`, 'GET', null,
-        { Authorization: `Bearer ${token}` })
+      const data = await request(`/api/note/${id}`, "GET", undefined, {
+        Authorization: `Bearer ${token}`,
+      })
       setNote(data)
-    } catch (error) {
-
+    } catch {
+      // TODO
     }
   }, [token, id, request])
 
@@ -33,15 +38,19 @@ const NotePage: React.FunctionComponent = () => {
     fetchData()
   }, [fetchData])
 
-  if (loading || !note) {
+  const handleHistoryClick = React.useCallback(() => {
+    history.push("/note/list")
+  }, [history])
+
+  if (isLoading || !note) {
     return <Loader />
   }
 
-  console.log(note)
   return (
     <div>
+      <button onClick={handleHistoryClick}>History</button>
       <h1>NotePage</h1>
-      <p>{note?.comment || 'Нет комментария'}</p>
+      <p>{note?.comment || "Нет комментария"}</p>
       <p>{note?.date}</p>
       <p>{MOOD_DESCRIPTION[note?.mood]}</p>
     </div>

@@ -1,9 +1,9 @@
-import { createGlobalStyle } from 'styled-components'
-import { reset } from './reset'
-import { color } from './color'
+import { createGlobalStyle } from "styled-components"
+import { reset } from "./reset"
+import { color } from "./color"
 
 const GlobalStyle = createGlobalStyle`
-  ${reset};
+  ${reset}
 
   body {
     background: ${color.dark};

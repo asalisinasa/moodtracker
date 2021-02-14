@@ -1,0 +1,82 @@
+{
+  "plugins": [
+    "@typescript-eslint",
+    "prettier",
+    "unicorn",
+    "import",
+    "react"
+  ],
+  "extends": [
+    "airbnb-typescript/base",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:unicorn/recommended",
+    "plugin:prettier/recommended",
+    "prettier",
+    "prettier/@typescript-eslint",
+    "react-app"
+  ],
+  "parserOptions": {
+    "project": [
+      "./tsconfig.json",
+      "prettier.config.ts"
+    ],
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "semi": [
+      2,
+      "never"
+    ],
+    "prettier/semi": "off",
+    "no-debugger": "off",
+    "no-console": 0,
+    "react/jsx-max-props-per-line": [
+      2,
+      {
+        "maximum": 1,
+        "when": "multiline"
+      }
+    ],
+    "react/no-unused-prop-types": "error",
+    "unicorn/filename-case": [
+      "error",
+      {
+        "cases": {
+          "camelCase": true,
+          "pascalCase": true
+        }
+      }
+    ],
+    "unicorn/no-null": "off",
+    "unicorn/prevent-abbreviations": "off",
+    "import/extensions": "off",
+    "import/prefer-default-export": "off",
+    "react-hooks/exhaustive-deps": "error",
+    "prettier/prettier": [
+      "error",
+      {
+        "semi": false
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
+      "parserOptions": {
+        "project": [
+          "./tsconfig.json"
+        ]
+      }
+    }
+  ],
+  "parser": "@typescript-eslint/parser"
+}

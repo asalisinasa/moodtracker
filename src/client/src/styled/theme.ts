@@ -1,14 +1,14 @@
-import { color } from './color'
-import { typography } from './typography'
+import { color } from "./color"
+import { typography } from "./typography"
 
-interface IThemeProps {
+interface IThemeProperties {
   color: typeof color
   typography: typeof typography
 }
 
-const theme: IThemeProps = {
+const theme: IThemeProperties = {
   color,
-  typography
+  typography,
 }
 
 export default theme

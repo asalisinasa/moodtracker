@@ -1,16 +1,30 @@
-import React from 'react'
+import React from "react"
 
-export const useHttp = () => {
-  const [loading, setLoading] = React.useState(false)
-  const [error, setError] = React.useState(null)
+interface IUseHttp {
+  isLoading: boolean
+  request: AnyFunction
+  error: Error | null
+  clearError: AnyFunction
+}
+
+export const useHttp: () => IUseHttp = () => {
+  const [isLoading, setIsLoading] = React.useState(false)
+  const [httpError, setHttpError] = React.useState(null)
 
   const request = React.useCallback(
-    async (url, method = 'GET', body = null, headers = {}) => {
+    async (
+      url,
+      method = "GET",
+      initialBody: string | null = null,
+      initialHeaders = {}
+    ) => {
+      let body = initialBody
+      const headers = initialHeaders
 
       try {
         if (body) {
           body = JSON.stringify(body)
-          headers['Content-Type'] = 'application/json'
+          headers["Content-Type"] = "application/json"
         }
 
         const response = await fetch(url, { method, body, headers })
@@ -20,17 +34,19 @@ export const useHttp = () => {
           throw new Error(data.message || "Что-то пошло не так")
         }
 
-        setLoading(false)
+        setIsLoading(false)
 
         return data
       } catch (error) {
-        setLoading(false)
-        setError(error.message)
+        setIsLoading(false)
+        setHttpError(error.message)
         throw error
       }
-    }, [])
+    },
+    []
+  )
 
-  const clearError = React.useCallback(() => setError(null), [])
+  const clearError = React.useCallback(() => setHttpError(null), [])
 
-  return { loading, request, error, clearError }
+  return { isLoading, request, error: httpError, clearError }
 }
