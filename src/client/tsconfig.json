@@ -2,10 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "module": "esnext",
-    "lib": [
-      "DOM",
-      "ESNext"
-    ],
+    "lib": ["DOM", "ESNext"],
     "allowJs": true,
     "jsx": "react-jsx",
     "resolveJsonModule": true,
@@ -26,11 +23,6 @@
     "sourceMap": true
   },
   "compileOnSave": true,
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "/node_modules",
-    "build"
-  ]
+  "include": ["src"],
+  "exclude": ["/node_modules", "build"]
 }
