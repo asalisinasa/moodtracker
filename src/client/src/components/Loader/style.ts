@@ -19,6 +19,5 @@ export const Loader = styled.div`
 export const Spinner = styled.div`
   width: 40px;
   height: 40px;
-  border: 5px solid ${({ theme }) => theme.color.light};
   animation: ${spin} 1s infinite linear;
 `

@@ -42,8 +42,9 @@ const getTheme = (
   return buttonTheme[variant][state]
 }
 
-const getStyles = ({ variant, theme }) => css`
+const getStyles = ({ variant, theme, isFullWidth }) => css`
   ${typography.action}
+  ${isFullWidth && "width: 100%;"}
   padding: 16px 8px;
   border-radius: 8px;
   background: ${getTheme(variant, "default", theme).background};
@@ -62,11 +63,16 @@ const getStyles = ({ variant, theme }) => css`
 `
 
 /* eslint-disable prettier/prettier */
-export const Button = styled.button < { variant: C.Variant } > `
-  ${({ variant, theme }) => getStyles({ variant, theme })}
+export const Button = styled.button<{
+  variant: C.Variant
+  isFullWidth: boolean
+}>`
+  ${({ variant, theme, isFullWidth }) =>
+    getStyles({ variant, theme, isFullWidth })}
 `
 
 /* eslint-disable prettier/prettier */
-export const Link = styled.a < { variant: C.Variant } > `
-  ${({ variant, theme }) => getStyles({ variant, theme })}
+export const Link = styled.a<{ variant: C.Variant; isFullWidth: boolean }>`
+  ${({ variant, theme, isFullWidth }) =>
+    getStyles({ variant, theme, isFullWidth })}
 `
